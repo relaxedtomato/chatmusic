@@ -1,6 +1,6 @@
 var bluebird = require('bluebird');
 var mongoose = require('mongoose');
-var models = require('./models/models.js');
+var models = require('./models');
 var User = models.User;
 
 var data = {
