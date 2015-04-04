@@ -1,1 +1,21 @@
-Hello World From Views
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Hello World From Views </title>
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/controllers/logincontroller.js"></script>
+		<script src="js/factories/authentication.js"></script>
+	</head>
+	<!-- CHECK: np-app name -->
+	<body ng-app="ChatMusic">
+		<div ng-controller="LoginController">
+			<form ng-submit="userLogin()">
+				<input type="text" ng-model="user.user_name" placeholder="User Name">
+				<input type="text" ng-model="user.user_password" placeholder="Password">
+				<input type="submit" value="login">
+			</form>
+		</div>
+		{{ 2 + 2 }}
+	</body>
+</html>

@@ -1,8 +1,7 @@
 var bluebird = require('bluebird');
 var mongoose = require('mongoose');
 var models = require('./models/models.js');
-var User = bluebird.promisifyAll(models.User);
-
+var User = models.User;
 
 var data = {
 	User: [
