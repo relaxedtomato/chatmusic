@@ -14,7 +14,11 @@
 				<input type="text" ng-model="user.user_name" placeholder="User Name">
 				<input type="password" ng-model="user.user_password" placeholder="Password">
 				<input type="submit" value="login">
+				<span>{{ loginstatus }}</span>
 			</form>
+			<div class="chatroom" ng-show="showChatroom">
+			Here is the chatroom
+		</div>
 		</div>
 	</body>
 </html>

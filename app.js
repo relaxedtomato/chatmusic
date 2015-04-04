@@ -1,5 +1,6 @@
 // node modules
 var express    = require('express'),
+    session     = require('express-session'),
     bodyParser = require('body-parser'),
     logger     = require('morgan')('dev'),
     nodeSass   = require('node-sass-middleware'),
@@ -10,6 +11,21 @@ var app = express();
 
 // req-res logging
 app.use(logger);
+
+// Session Init
+app.use(session({
+  secret : 'chatmusic',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
+
+// Passport's configuration
+require('./config')(passport);
+
+// Passport Init
+app.use(passport.initialize());
+app.use(passport.session());
 
 // sass middleware
 var sassMiddleware = nodeSass({
@@ -28,7 +44,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // root route
-app.use('/', require('./routes/index'));
+app.use('/', require('./routes/index')(passport));
 
 // catch 404 (i.e., no routes were hit) and forward to error handler
 app.use(function(req, res, next) {

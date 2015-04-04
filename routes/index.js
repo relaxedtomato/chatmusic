@@ -1,38 +1,18 @@
 var router = require('express').Router();
 var path = require('path');
 var User = require('../models').User;
-var passport = require('passport');
 
-// Init Passport's configuration
-require('../config')(passport);
+module.exports = function(passport) {
+	router.get('/', function(req, res, next) {
+		console.log(req.session);
+		res.sendFile(path.join(__dirname, '../views/index.html'));
 
-// passport init
-router.use(passport.initialize());
-router.use(passport.session());
-
-router.get('/', function(req, res, next) {
-	console.log("got here");
-	res.sendFile(path.join(__dirname, '../views/index.html'));
-});
-
-router.post('/login', function(req, res, next) {
-	console.log("/login");
-	console.log(req.body);
-
-	passport.authenticate('local-login', {
-	    successRedirect: '/loginSuccess',
-	    failureRedirect: '/loginFailure'
 	});
 
-	res.send(req.body);
-});
+	router.post('/login', passport.authenticate('local-login'), function(req, res, next) {
+		console.log("/login");
+		res.send(req.user);
+	});
 
-router.get('/loginSuccess', function(req, res, next) {
-	res.send("Successful Login");
-});
-
-router.get('/loginFailure', function(req, res, next) {
-	res.send("Failed Login");
-});
-
-module.exports = router;
+	return router;
+}
