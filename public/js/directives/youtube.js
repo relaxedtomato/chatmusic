@@ -10,8 +10,7 @@ app.directive('youtube', function($window, EventFactory) {
 
     template: '<div></div>',
 
-
-    link: function(scope, element, ytController) {
+    link: function(scope, element, attributes) {
       var tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -62,16 +61,18 @@ app.directive('youtube', function($window, EventFactory) {
       });
 
       function onPlayerStateChange(event) {
+        var socket = EventFactory.socket;
         if(event.data === 0){ // ended
-          // emitMe('ended', {currentTime: player.getCurrentTime()});
+          socket.emit('ended', {currentTime: player.getCurrentTime()});
         } else if(event.data === 1){ //playing
-          // emitMe('playing', {currentTime: player.getCurrentTime()});
+          console.log(EventFactory.socket);
+          socket.emit('playing', {currentTime: player.getCurrentTime()});
           console.log(player.getCurrentTime());
         } else if (event.data === 2){ //paused
-          // emitMe('paused', {currentTime: player.getCurrentTime()});
+          socket.emit('paused', {currentTime: player.getCurrentTime()});
           console.log(player.getCurrentTime());
         } else if (event.data === 5){ //video cued
-          // emitMe('cued', {currentTime: player.getCurrentTime()});
+          socket.emit('cued', {currentTime: player.getCurrentTime()});
           console.log(player.getCurrentTime());
         }
       }

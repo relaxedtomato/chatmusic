@@ -13,6 +13,6 @@ var playlistSchema = new mongoose.Schema({
 });
 
 module.exports = {
-  Song:      mongoose.model('Song', songSchema),
-  Playlist:      mongoose.model('Playlist', playlistSchema),
+  Song: mongoose.model('Song', songSchema),
+  Playlist: mongoose.model('Playlist', playlistSchema),
 };

@@ -1,6 +1,13 @@
 <div ng-controller="ytController">
   <youtube width="640" height="390" videoid="{{ videoID }}"></youtube>
-
+  <div>
       <input type="text" ng-model="songURL"></input>
       <button type="submit" ng-click="submitSong()">Submit Song</button>
+
+        <button>Next Song</button>
+        <h3>Playlist</h3>
+        <li ng-repeat="song in songs">
+          {{song.link}} <button ng-click="removeSong(song.link)">Remove</button>
+        </li>
+  </div>
 </div>
