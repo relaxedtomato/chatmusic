@@ -2,10 +2,12 @@
 var express    = require('express'),
     bodyParser = require('body-parser'),
     logger     = require('morgan')('dev'),
-    nodeSass   = require('node-sass-middleware');
+    nodeSass   = require('node-sass-middleware'),
+    io   = require('socket.io');
 
 // app instantiation
 var app = express();
+var socket = io(app);
 
 // req-res logging
 app.use(logger);
